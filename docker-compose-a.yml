@@ -1,0 +1,19 @@
+services:
+
+  api_a:
+    container_name: api_a
+    build: .
+    volumes:
+      - .:/code/
+    env_file:
+      - .env_api_a
+    ports:
+      - "8001:8001"
+    networks:
+      - proxynet
+
+    command: uvicorn main:app --host 0.0.0.0 --port 8001
+
+networks:
+  proxynet:
+    name: custom_network
